@@ -7,6 +7,9 @@ A **content-based Movie Recommendation System** built using **Python, Flask, and
 
 The system suggests films to a specified movie by analyzing **genres and plot resemblance** through **TF-IDF and Cosine Similarity**.
 
+# Project Video
+
+![demo](https://github.com/user-attachments/assets/4f1f9117-44b7-4e6d-824c-9194e96cb78d)
 
 
 # Key Features
