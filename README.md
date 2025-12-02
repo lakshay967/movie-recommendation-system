@@ -73,20 +73,23 @@ This method guarantees that suggestions rely on **movie content** proving effici
 
 - **Git & GitHub**
 
-## Folder Structure 
-movie-recommendation-system/
-├── app.py
-├── requirements.txt
-├── .gitignore
-├── src/
-│ └── recommender.py
-├── templates/
-│ ├── base.html
-│ └── index.html
-├── static/
-│ └── css/
-│ └── style.css
-├── data/
-│ └── tmdb_5000_movies.csv
+```text
+## 📂 Folder Structure
 
+```text
+movie-recommendation-system/
+├─ app.py
+├─ requirements.txt
+├─ .gitignore
+├─ src/
+│  └─ recommender.py
+├─ templates/
+│  ├─ base.html
+│  └─ index.html
+├─ static/
+│  └─ css/
+│     └─ style.css
+└─ data/
+   └─ tmdb_5000_movies.csv   (download from Kaggle)
+```
 # If you found this project useful, consider giving it a star!
