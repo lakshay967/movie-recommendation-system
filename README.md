@@ -73,9 +73,7 @@ This method guarantees that suggestions rely on **movie content** proving effici
 
 - **Git & GitHub**
 
-```text
-## 📂 Folder Structure
-
+# Folder Structure
 ```text
 movie-recommendation-system/
 ├─ app.py
