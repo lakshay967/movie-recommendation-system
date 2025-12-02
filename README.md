@@ -1,3 +1,6 @@
+# Lakshay Kumar 
+(B.Tech , Computer Science and Engineering)
+
 # Movie Recommendation System
 
 A **content-based Movie Recommendation System** built using **Python, Flask, and Machine Learning**.
@@ -69,3 +72,21 @@ This method guarantees that suggestions rely on **movie content** proving effici
 - **HTML & CSS** (custom UI)
 
 - **Git & GitHub**
+
+# Folder Structure 
+
+movie-recommendation-system/
+├── app.py
+├── requirements.txt
+├── src/
+│   └── recommender.py
+├── templates/
+│   ├── base.html
+│   └── index.html
+├── static/
+│   └── css/
+│       └── style.css
+├── data/
+│   └── tmdb_5000_movies.csv
+└── .gitignore
+# If you found this project useful, consider giving it a star!
