@@ -94,19 +94,6 @@ body {
     max-width: 960px;
 }
 
-/* Search + results layout */
-/* .layout-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-    gap: 20px;
-}
-
-@media (max-width: 860px) {
-    .layout-grid {
-        grid-template-columns: minmax(0, 1fr);
-    }
-} */
-
 .layout-grid {
     display: flex;
     gap: 20px;
