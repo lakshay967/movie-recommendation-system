@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="layout-grid">
+    <section class="card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">Find similar movies</h2>
+                <p class="card-subtitle">
+                    Recommendations based on genres &amp; storyline using TF-IDF vectors.
+                </p>
+            </div>
+        </div>
+
+        <form method="POST" class="search-form">
+            <label for="movie_title">Movie title</label>
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="movie_title"
+                    name="movie_title"
+                    value="{{ input_title }}"
+                    placeholder="e.g. Avatar, 3 Idiots, The Dark Knight"
+                    class="input-text"
+                >
+                <button type="submit" class="btn-primary">
+                    <span>🔍</span>
+                    <span>Recommend</span>
+                </button>
+            </div>
+
+            <div class="meta-row">
+                <span>Tip: Try typing a title you like and we’ll find similar ones.</span>
+                <span class="meta-pill">
+                    🔁 Content-based · no login needed
+                </span>
+            </div>           
+        </form>
+        <div class="quick-picks">
+                <span class="quick-picks-label">Try:</span>
+                <div class="quick-picks-chips">
+                    {% for sample in ['Avatar','Inception','The Conjuring','The Dark Knight'] %}
+                        <form method="POST" class="quick-chip-form">
+                            <input type="hidden" name="movie_title" value="{{ sample }}">
+                            <button type="submit" class="quick-chip-button">
+                                {{ sample }}
+                            </button>
+                        </form>
+                    {% endfor %}
+                </div>
+            </div>
+
+        {% if error_message %}
+            <div class="error-banner">
+                {{ error_message }}
+            </div>
+        {% endif %}
+
+        {% if suggestions %}
+            <div class="suggestions-card">
+                <div>Did you mean:</div>
+                <ul class="suggestion-list">
+                    {% for s in suggestions %}
+                        <li>
+                            <form method="POST" class="suggestion-chip-form">
+                                <input type="hidden" name="movie_title" value="{{ s }}">
+                                <button type="submit" class="suggestion-chip-button">
+                                    {{ s }}
+                                </button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if recommendations and not error_message %}
+            <div style="margin-top:16px;">
+                <div class="results-header">
+                    <h3 class="results-title">
+                        Recommendations similar to
+                        <span style="color:#38bdf8;">{{ input_title }}</span>
+                    </h3>
+                    <div class="results-pill">
+                        🎬 Using TF-IDF cosine similarity over genres + overview
+                    </div>
+                </div>
+                <div class="results-grid">
+                    {% for movie in recommendations %}
+                        <a href="{{ movie.url }}" target="_blank" class="movie-card">
+                            <div class="movie-title-row">
+                                <h4 class="movie-title">{{ movie.title }}</h4>
+                                <span class="sim-badge">
+                                    score: {{ '%.3f'|format(movie.similarity) }}
+                                </span>
+                            </div>
+
+                            {% if movie.genres %}
+                                <div class="movie-genres">
+                                    {{ movie.genres }}
+                                </div>
+                            {% endif %}
+
+                            {% if movie.overview %}
+                                <p class="movie-overview">
+                                    {{ movie.overview }}
+                                </p>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </section>
+
+    <aside class="card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">How this AI works</h2>
+                <p class="card-subtitle">
+                    Under the hood of your movie recommendations.
+                </p>
+            </div>
+        </div>
+
+        <p style="font-size:13px; color:#cbd5f5;">
+            This project uses a <strong>content-based recommendation</strong> approach:
+        </p>
+        <ul class="info-list">
+            <li>
+                We combine each movie's <strong>genres</strong> and <strong>overview</strong>
+                into a single text field.
+            </li>
+            <li>
+                That text is converted to numerical vectors using
+                <strong>TF-IDF (unigrams + bigrams)</strong>.
+            </li>
+            <li>
+                We compute <strong>cosine similarity</strong> between movies in this vector space.
+            </li>
+            <li>
+                When you search a title, we find the <strong>closest movies</strong> in this space
+                and show you the top matches.
+            </li>
+        </ul>
+
+        <p style="font-size:13px; color:#9ca3af; margin-top:12px;">
+            This system doesn’t need user accounts or ratings. It purely analyzes
+            the <strong>content of the movies</strong>
+    
+        </p>
+
+        <p style="font-size:13px; color:#9ca3af; margin-top:12px;">
+            Future improvements could include:
+        </p>
+        <ul class="info-list">
+            <li>Adding cast/director information into the content vector.</li>
+            <li>Combining with collaborative filtering for a hybrid system.</li>
+            <li>Integrating live movie data from an external API.</li>
+        </ul>
+    </aside>
+</div>
+{% endblock %}

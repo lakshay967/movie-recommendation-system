@@ -1,0 +1,16 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Env files
+.env
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Big dataset 
+data/tmdb_5000_movies.csv
